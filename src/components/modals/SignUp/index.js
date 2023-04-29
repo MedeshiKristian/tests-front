@@ -4,16 +4,15 @@ import { useContext, useState } from 'react'
 import { AuthService } from '../../../services/user'
 import { Context } from '../../../index'
 import AuthInput from '../../ui/input'
+import { LockClosedOutline, MailOutline } from 'react-ionicons'
 
-const SignIn = ({ setIsSignInModal, setIsSignUpModal }) => {
+const SignUp = ({ setIsSignUpModal, setIsSignInModal }) => {
   const { user } = useContext(Context)
 
   const [userData, setUserData] = useState({
     email: '',
-    password: ''
+    password: '',
   })
-
-  const [visiblePassword, setVisiblePassword] = useState(false)
 
   const handleUserDataChange = (event) => {
     const { name, value } = event.target
@@ -25,36 +24,44 @@ const SignIn = ({ setIsSignInModal, setIsSignUpModal }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setIsSignInModal(false)
-    AuthService.signIn(userData)
+    setIsSignUpModal(false)
+    AuthService.signUp(userData)
       .then(response => {
-        user.handleAuthIn(response)
+        user.handleAuth(response)
       })
       .catch(error => {
         console.error(error)
       })
   }
 
-  const handleSignUpModalOpening = () => {
-    setIsSignUpModal(true)
-    setIsSignInModal(false)
+  const handleSignInModalOpening = () => {
+    setIsSignInModal(true)
+    setIsSignUpModal(false)
   }
 
   return (
-    <TemplateModal title="Sign In" close={() => setIsSignInModal(false)}>
+    <TemplateModal title="Sign Up" close={() => setIsSignUpModal(false)}>
       <AuthForm onSubmit={handleSubmit}>
         <AuthInput placeholder="Email"
                    name="email"
                    type="email"
                    value={userData.email}
                    onChange={handleUserDataChange}
+                   Icon={<MailOutline style={{padding:"0"}}/>}
         />
         <AuthInput placeholder="Password"
                    name="password"
                    value={userData.password}
-                   type={visiblePassword ? 'text' : 'password'}
+                   type="password"
                    onChange={handleUserDataChange}
+                   Icon={<LockClosedOutline style={{padding:"0"}}/>}
         />
+        {/*<AuthInput placeholder="Password confirmation"
+               name="password confirmation"
+               value={userData.password}
+               type="password"
+               onChange={handleUserDataChange}
+        />*/}
         <p style={{
           display: 'flex',
           alignItems: 'start',
@@ -62,16 +69,16 @@ const SignIn = ({ setIsSignInModal, setIsSignUpModal }) => {
           margin: '0px',
           fontSize: '0.95rem'
         }}>
-          Don't have an account?
+          Already have an account?
           <span style={{
             color: 'blue',
             cursor: 'pointer'
-          }} onClick={handleSignUpModalOpening}> Sign Up</span>
+          }} onClick={handleSignInModalOpening}> Sign In</span>
         </p>
-        <AuthButton type="submit" style={{padding:"1.5vh 5vw", margin:"10px"}}>Submit</AuthButton>
+        <AuthButton type="submit">Submit</AuthButton>
       </AuthForm>
     </TemplateModal>
   )
 }
 
-export default SignIn
+export default SignUp

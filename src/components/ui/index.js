@@ -1,5 +1,5 @@
-export { Input } from './input'
+// export { default as Input } from './input'
 
-export { BlueButton } from './buttons'
+export { AuthButton } from './buttons'
 
 export { AuthForm } from './forms'

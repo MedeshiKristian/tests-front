@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
-import { Nav, Logo, Wrapper } from './styles.js'
-import logo from '../../school-outline.svg'
+import React, { useContext, useState } from 'react'
+import { Nav, Logo, Wrapper } from './style.js'
 import SignIn from '../modals/SignIn'
-import SignUp from '../modals/Sign Up'
-import { BlueButton } from '../ui'
+import SignUp from '../modals/SignUp'
+import { AuthButton } from '../ui'
 import { AuthService } from '../../services/user'
+import { Context } from '../../index'
+import { observer } from 'mobx-react-lite'
+import { School, SchoolOutline, Woman } from 'react-ionicons'
 
-const Header = () => {
+const Header = observer(() => {
+  const { userStore } = useContext(Context)
+
   const [isSignUpModal, setIsSignUpModal] = useState(false)
   const [isSignInModal, setIsSignInModal] = useState(false)
 
@@ -14,30 +18,42 @@ const Header = () => {
     event.preventDefault()
     AuthService.signOut()
       .then(response => {
-        console.log(response.data)
-        localStorage.removeItem('user_id')
-        localStorage.removeItem('token')
+        console.log(response)
+        userStore.handleAuthOut()
       })
-      .catch(error => console.error(error))
+      .catch(error => {
+        console.error(error)
+      })
   }
 
   return (
     <>
       <Wrapper>
-        <Logo>
-          <img src={logo} alt="logo"/>
+        <Logo to="/">
+          <SchoolOutline color="blue"
+                  height="12vh"
+                  width="auto"
+                  font-size="34px"/>
         </Logo>
         <Nav>
-          {/*<Link>Courses</Link>*/}
-          <BlueButton onClick={() => setIsSignUpModal(true)}>Sign up</BlueButton>
-          <BlueButton onClick={() => setIsSignInModal(true)}>Sign In</BlueButton>
-          <BlueButton onClick={handleSignOut}>Sign Out</BlueButton>
+          {!userStore.isAuth ?
+            <>
+              <AuthButton onClick={() => setIsSignUpModal(true)}>Sign up</AuthButton>
+              <AuthButton onClick={() => setIsSignInModal(true)}>Sign In</AuthButton>
+            </>
+            :
+            <>
+              <AuthButton onClick={handleSignOut}>Sign Out</AuthButton>
+            </>
+          }
         </Nav>
       </Wrapper>
-      {isSignInModal && (<SignIn setIsSignInModal={setIsSignInModal}/>)}
-      {isSignUpModal && (<SignUp setIsSignUpModal={setIsSignUpModal}/>)}
+      {isSignUpModal && <SignUp setIsSignUpModal={setIsSignUpModal}
+                                setIsSignInModal={setIsSignInModal}/>}
+      {isSignInModal && <SignIn setIsSignInModal={setIsSignInModal}
+                                setIsSignUpModal={setIsSignUpModal}/>}
     </>
   )
-}
+})
 
 export default Header

@@ -1,4 +1,4 @@
-import { Container, Title, Wrapper } from './styles'
+import { Container, Title, Wrapper } from './style'
 
 const TemplateModal = ({ children, title, close }) => {
   return (

@@ -12,7 +12,8 @@ export const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: rgb(0, 0, 0, 0.5);
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(3px);
+  z-index: 10;
 `
 
 export const Container = styled.div`
@@ -25,7 +26,7 @@ export const Container = styled.div`
   height: auto;
   width: auto;
   border-radius: 20px;
-  padding: 0.5% 3%;
+  padding: 0.5% 2%;
 `
 
 export const Title = styled.h1`
