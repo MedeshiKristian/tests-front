@@ -1,18 +1,17 @@
 import React from 'react'
-import { Actions, Logo, Wrapper } from './style'
-import logo from '../../../school-outline.svg'
+import { CardActions, Wrapper } from './style'
 
-const Card = ({ onClick, data, children }) => {
+const Card = ({ title, onClick, children }) => {
   return (
     <Wrapper onClick={onClick}>
-      <h2>{data.name}</h2>
+      <h2>{title}</h2>
       {/*<Logo>*/}
       {/*  <img src={logo} alt={logo}/>*/}
       {/*</Logo>*/}
       <div className="description">
-        <Actions className="actions">
+        <CardActions className="actions">
           {children}
-        </Actions>
+        </CardActions>
       </div>
     </Wrapper>
   )

@@ -5,10 +5,10 @@ import { AuthButton, AuthForm } from '../../ui'
 import { DocumentOutline } from 'react-ionicons'
 import { CourseService } from '../../../services'
 import { Context } from '../../../index'
+import { COLORS } from '../../values/colors'
 
 const CreateCourse = ({ setIsCreateCourseModal }) => {
   const { coursesStore } = useContext(Context)
-
   const [courseData, setCourseData] = useState({
     name: ''
   })
@@ -24,6 +24,7 @@ const CreateCourse = ({ setIsCreateCourseModal }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    setIsCreateCourseModal(false)
     CourseService.create(courseData)
       .then(response => {
         console.log(response)
@@ -39,9 +40,9 @@ const CreateCourse = ({ setIsCreateCourseModal }) => {
       <AuthForm onSubmit={handleSubmit}>
         <AuthInput name="name"
                    value={courseData.name}
-                   placeholder="Course Name"
-                   Icon={<DocumentOutline/>}
+                   placeholder="Course name"
                    onChange={handleCourseDataChange}
+                   BaseIcon={DocumentOutline}
         />
         <AuthButton type="submit" style={{ padding: '1.5vh 5vw', margin: '10px' }}>Submit</AuthButton>
       </AuthForm>

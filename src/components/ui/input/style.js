@@ -1,12 +1,13 @@
 import styled from 'styled-components'
+import { COLORS } from '../../values/colors'
 
 export const Wrapper = styled.div`
   display: flex;
-  border: 1px solid blue;
+  border: 1px solid ${COLORS.primaryVariant};
   height: 100%;
   width: 100%;
   padding: 10px;
-  margin: 15px;
+  margin: 10px 0 0 0;
   border-radius: 7px;
   align-items: center;
 `
@@ -31,6 +32,5 @@ export const Input = styled.input`
 
   &:focus {
     outline: 0;
-    //background-color: red;
   }
 `

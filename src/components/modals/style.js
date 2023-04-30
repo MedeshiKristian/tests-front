@@ -25,10 +25,11 @@ export const Container = styled.div`
   background-color: white;
   height: auto;
   width: auto;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 0.5% 2%;
 `
 
 export const Title = styled.h1`
-  
+  padding: 0;
+  margin: 12px;
 `

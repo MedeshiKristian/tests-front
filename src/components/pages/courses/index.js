@@ -1,34 +1,42 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { CourseService } from '../../services'
-import { Container, Grid } from './style'
-import Card from '../ui/card'
-import { Context } from '../../index'
+import { CourseService } from '../../../services'
+import { Context } from '../../../index'
 import { observer } from 'mobx-react-lite'
-import { CardButton } from '../ui/buttons'
-import CreateCourse from '../modals/CreateCourse'
+import CreateCourse from '../../modals/create-course'
+import { useNavigate } from 'react-router-dom'
+import { GridWrapper, Grid, Card, CardButton } from '../../ui'
 
 const Courses = observer(() => {
   const { userStore, coursesStore } = useContext(Context)
   const [isCreateCourseModal, setIsCreateCourseModal] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     CourseService.fetch()
       .then(response => {
         console.log(response.data)
-        coursesStore.setCourses(response.data)
+        coursesStore.set(response.data)
       })
       .catch(error => {
         console.error(error)
       })
-  }, [])
+  }, [coursesStore])
 
   const handleCourseAdding = (event) => {
     event.preventDefault()
     setIsCreateCourseModal(true)
   }
 
+  const handleCourseShow = (event, id) => {
+    event.preventDefault()
+    try {
+      navigate(`/course/${id}`)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const handleCourseDelete = (event, id) => {
-    console.log('courseDeleting')
     CourseService.delete(id)
       .then(response => {
         console.log(response)
@@ -40,23 +48,23 @@ const Courses = observer(() => {
   }
 
   return (
-    <Container>
+    <GridWrapper>
       <Grid>
-        {coursesStore.courses.map((course) => (
-          <Card data={course}>
-            <CardButton>Show Course</CardButton>
+        {coursesStore.data.map((course) => (
+          <Card title={course.name}>
+            <CardButton onClick={(event) => handleCourseShow(event, course.id)}>Show Course</CardButton>
             {userStore.isAdmin &&
               <CardButton onClick={(event) => handleCourseDelete(event, course.id)}>
                 Delete Course
               </CardButton>}
           </Card>
         ))}
-        {userStore.isAdmin && <Card data={{ name: 'Add Course' }} onClick={handleCourseAdding}/>}
+        {userStore.isAdmin && <Card title={'Add course'} onClick={handleCourseAdding}/>}
         {(() => {
           const cards = []
           for (let i = 0; i < 10; i++) {
             cards.push(
-              <Card data={{ name: 'Title' }}>
+              <Card title={'Course'}>
                 <CardButton>Show Course</CardButton>
               </Card>)
           }
@@ -64,7 +72,7 @@ const Courses = observer(() => {
         })()}
       </Grid>
       {isCreateCourseModal && <CreateCourse setIsCreateCourseModal={setIsCreateCourseModal}/>}
-    </Container>
+    </GridWrapper>
   )
 })
 

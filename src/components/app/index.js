@@ -1,7 +1,7 @@
-import Header from '../Header'
+import Header from '../header'
 import { BrowserRouter } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
-import AppRouter from '../AppRouter'
+import AppRouter from '../router'
 import { useContext, useEffect } from 'react'
 import { Context } from '../../index'
 
@@ -9,11 +9,8 @@ const App = observer(() => {
   const { userStore } = useContext(Context)
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      userStore.setIsAuth(true)
-    }
-  },[])
+    userStore.checkStorage()
+  }, [userStore])
 
   return (
     <BrowserRouter>

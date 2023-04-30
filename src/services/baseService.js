@@ -8,6 +8,9 @@ const BaseService = (url) => {
     async fetch () {
       return await axios.get(url)
     },
+    async get (id) {
+      return await axios.get(`${url}/${id}`)
+    },
     async edit (id, data) {
       return await axios.patch(`${url}/${id}`, data)
     },

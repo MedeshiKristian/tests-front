@@ -5,12 +5,12 @@ export const Wrapper = styled.div`
   flex-direction: column;
   //justify-content: center;
   box-shadow: 0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.5);
-  background-color: white;
+  //background-color: white;
   border-radius: 5px;
   //padding: 0;
   padding: 5px 15px;
-  height: 20vw;
-  width: 15vw;
+  height: 270px;
+  width: 200px;
   transition: all .5s ease-in-out;
   z-index: 0;
   
@@ -64,7 +64,7 @@ export const Logo = styled.div`
   margin: 20px;
 `
 
-export const Actions = styled.div`
+export const CardActions = styled.div`
   display: none;
   //align-items: center;
   //padding: 0;

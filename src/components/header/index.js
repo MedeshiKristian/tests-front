@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react'
-import { Nav, Logo, Wrapper } from './style.js'
-import SignIn from '../modals/SignIn'
-import SignUp from '../modals/SignUp'
+import { NavBar, Logo, Wrapper, NavLink } from './style.js'
+import SignIn from '../modals/sign-in'
+import SignUp from '../modals/sign-up'
 import { AuthButton } from '../ui'
-import { AuthService } from '../../services/user'
+import { AuthService } from '../../services'
 import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
-import { School, SchoolOutline, Woman } from 'react-ionicons'
+import { SchoolOutline } from 'react-ionicons'
+import { COLORS } from '../values/colors'
 
 const Header = observer(() => {
   const { userStore } = useContext(Context)
@@ -30,12 +31,12 @@ const Header = observer(() => {
     <>
       <Wrapper>
         <Logo to="/">
-          <SchoolOutline color="blue"
-                  height="12vh"
-                  width="auto"
-                  font-size="34px"/>
+          <SchoolOutline color={COLORS.primaryVariant}
+                         height="10vh"
+                         width="auto"/>
         </Logo>
-        <Nav>
+        <NavBar>
+          <NavLink to="/">Courses</NavLink>
           {!userStore.isAuth ?
             <>
               <AuthButton onClick={() => setIsSignUpModal(true)}>Sign up</AuthButton>
@@ -43,10 +44,11 @@ const Header = observer(() => {
             </>
             :
             <>
+              {userStore?.user?.email}
               <AuthButton onClick={handleSignOut}>Sign Out</AuthButton>
             </>
           }
-        </Nav>
+        </NavBar>
       </Wrapper>
       {isSignUpModal && <SignUp setIsSignUpModal={setIsSignUpModal}
                                 setIsSignInModal={setIsSignInModal}/>}

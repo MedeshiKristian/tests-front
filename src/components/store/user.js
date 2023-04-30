@@ -3,7 +3,24 @@ import { makeAutoObservable } from 'mobx'
 export default class UserStore {
   constructor () {
     this._isAuth = false
+    this._user = null
     makeAutoObservable(this)
+  }
+
+  checkStorage() {
+    const token = localStorage.getItem('token')
+    if (token) {
+      this.setIsAuth(true)
+      this.setUser(JSON.parse(localStorage.getItem('user')))
+    }
+  }
+
+  get user() {
+    return this._user
+  }
+
+  setUser(user) {
+    this._user = user
   }
 
   setIsAuth (bool) {
@@ -15,12 +32,14 @@ export default class UserStore {
   }
 
   get isAdmin () {
-    return this.isAuth && localStorage.getItem('user_role') === 'admin'
+    return this.isAuth && this.user?.role === 'admin'
   }
 
   handleAuthIn (response) {
     this.setIsAuth(true)
-    localStorage.setItem('user_role', response.data.role)
+    this.setUser(response.data)
+    localStorage.setItem('user', JSON.stringify(response.data))
+    // localStorage.setItem('user_role', response.data.role)
     localStorage.setItem('token', response.headers.get('Authorization'))
   }
 

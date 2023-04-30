@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { COLORS } from '../../values/colors'
 
 export const AuthButton = styled.button`
   display: flex;
@@ -11,15 +12,11 @@ export const AuthButton = styled.button`
   margin: 1vh;
   color: black;
   border-radius: 20px;
-  //border: 0;
-  background: #ffffff;
-  border: 2px solid #5bff51;
-  //border: 2px solid #635fc7;
-
-  //background: transparent;
+  background: ${COLORS.primary};
+  border: 2px solid ${COLORS.primaryVariant};
 
   &:hover {
-    //background: #5bff51;
+    background: ${COLORS.primary};
     cursor: pointer;
     box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.5);
   }
@@ -30,13 +27,15 @@ export const CardButton = styled.button`
   justify-content: center;
   text-align: center;
   text-decoration: none;
-  font-size: 1rem;
+  //font-size: 1rem;
+  font-size: 2.5vh;
   border-radius: 5px;
   margin: 5px;
-  padding: 10px;
+  padding: 2vh;
   color: white;
   border: 0;
-  background: darkslategrey;
+  background: ${COLORS.iconColor};
+  //background: darkslategrey;
   
   &:hover {
     cursor: pointer;

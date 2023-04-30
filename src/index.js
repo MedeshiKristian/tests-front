@@ -1,10 +1,10 @@
 import React, { createContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import App from './components/App'
+import App from './components/app'
 import reportWebVitals from './reportWebVitals'
-import UserStore from './components/store/UserStore'
-import CoursesStore from './components/store/CoursesStore'
+import UserStore from './components/store/user'
+import CreateStore from './components/store/base'
 
 export const Context = createContext(null)
 
@@ -13,7 +13,9 @@ root.render(
   <React.StrictMode>
     <Context.Provider value={{
       userStore: new UserStore(),
-      coursesStore: new CoursesStore(),
+      coursesStore: CreateStore(),
+      testsStore: CreateStore(),
+      questionsStore: CreateStore()
     }}>
       <App/>
     </Context.Provider>
