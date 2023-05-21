@@ -7,10 +7,10 @@ export const Wrapper = styled.div`
   box-shadow: 0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.5);
   background-color: white;
   border-radius: 5px;
-  width: 100%;
+  width: 90%;
   height: auto;
-  padding: 10px;
   margin: 5px;
+  padding: 10px;
 
   transition: all .5s ease-in-out;
 

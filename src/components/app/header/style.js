@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { COLORS } from '../values/colors'
+import { COLORS } from '../../values/colors'
 
-export const Wrapper = styled.header`
+export const Container = styled.header`
   width: 100%;
   height: 100%;
   position: sticky;
@@ -13,14 +13,22 @@ export const Wrapper = styled.header`
   //border-bottom: 1px solid black;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0.5% 0;
   z-index: 5;
 `
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 85%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5% 0;
+`
+
 export const Logo = styled(Link)`
-  margin-left: 60px;
+  
 `
 
 export const NavBar = styled.div`
@@ -42,7 +50,7 @@ export const NavLink = styled(Link)`
     width: 100%;
     transform: scaleX(0);
     height: 1px;
-    background-color: ${COLORS.primaryVariant};
+    background-color: ${COLORS.borderColor};
     transform-origin: center;
     transition: transform 0.25s ease-out;
   }

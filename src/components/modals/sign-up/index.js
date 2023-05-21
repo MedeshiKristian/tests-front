@@ -1,11 +1,12 @@
-import { AuthForm, AuthButton } from '../../ui'
-import TemplateModal from '../index'
+import { FormModal, RoundButton } from '../../ui'
+import BaseModal from '../index'
 import { useContext, useEffect, useState } from 'react'
 import { AuthService } from '../../../services'
 import { Context } from '../../../index'
-import AuthInput from '../../ui/input'
+import AuthInput from '../../ui/auth-input'
 import { LockClosedOutline, MailOutline } from 'react-ionicons'
 import { COLORS } from '../../values/colors'
+import ConfirmationModal from '../confirmation'
 
 const SignUp = ({ setIsSignUpModal, setIsSignInModal }) => {
   const { userStore } = useContext(Context)
@@ -62,8 +63,8 @@ const SignUp = ({ setIsSignUpModal, setIsSignInModal }) => {
   }
 
   return (
-    <TemplateModal title="Sign Up" close={() => setIsSignUpModal(false)}>
-      <AuthForm onSubmit={handleSubmit}>
+    <BaseModal title="Sign Up" close={() => setIsSignUpModal(false)}>
+      <FormModal onSubmit={handleSubmit}>
         <AuthInput placeholder="Email"
                    name="email"
                    value={userData.email}
@@ -102,14 +103,14 @@ const SignUp = ({ setIsSignUpModal, setIsSignInModal }) => {
         }}>
           Already have an account?
           <span style={{
-            color: `${COLORS.primaryVariant}`,
+            color: `${COLORS.borderColor}`,
             cursor: 'pointer',
             whiteSpace: 'pre-wrap'
-          }} onClick={handleSignInModalOpening}>{' Sign Up'}</span>
+          }} onClick={handleSignInModalOpening}>{' Sign In'}</span>
         </p>
-        <AuthButton type="submit" style={{ padding: '1.5vh 5vw', margin: '10px' }}>Submit</AuthButton>
-      </AuthForm>
-    </TemplateModal>
+        <RoundButton type="submit" style={{ padding: '1.5vh 5vw', margin: '10px' }}>Submit</RoundButton>
+      </FormModal>
+    </BaseModal>
   )
 }
 

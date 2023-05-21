@@ -25,11 +25,13 @@ export const Container = styled.div`
   background-color: white;
   height: auto;
   width: auto;
+  min-width: 400px;
+  min-height: 200px;
   border-radius: 10px;
   padding: 0.5% 2%;
 `
 
-export const Title = styled.h1`
+export const Title = styled.h2`
   padding: 0;
   margin: 12px;
 `

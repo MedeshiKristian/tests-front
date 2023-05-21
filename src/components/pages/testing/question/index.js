@@ -12,10 +12,25 @@ const unmarkOption = (ref) => {
   ref.current.style.boxShadow = '0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.5)'
 }
 
-export const QuestionComponent = observer(({ question, answers, setAnswers }) => {
-  const [previous, setPrevious] = useState(-1)
+export const Question = observer(({
+  question,
+  answers,
+  setAnswers,
+  showAnswers
+}) => {
+  const [previous, setPrevious] = useState(null)
 
-  const ref = [useRef(null), useRef(null), useRef(null), useRef(null)]
+  const a = 'a'
+  const b = 'b'
+  const c = 'c'
+  const d = 'd'
+
+  const ref = {
+    a: useRef(null),
+    b: useRef(null),
+    c: useRef(null),
+    d: useRef(null)
+  }
 
   const answer = answers[question.id]
 
@@ -23,34 +38,39 @@ export const QuestionComponent = observer(({ question, answers, setAnswers }) =>
     if (answer !== undefined) {
       markOption(ref[answer])
       setPrevious(answer)
+    } else if (previous) {
+      unmarkOption(ref[previous])
     }
   }, [answer])
 
-  const onClick = (event, index) => {
+  const onClick = (event, option) => {
     event.preventDefault()
-    if (previous !== -1) {
+    if (previous === option || showAnswers) {
+      return
+    }
+    if (previous !== null) {
       unmarkOption(ref[previous])
     }
     // markOption(ref[index])
     setAnswers({
       ...answers,
-      [question.id]: index
+      [question.id]: option
     })
-    setPrevious(index)
+    setPrevious(option)
   }
 
   return (
     <OptionsContainer>
-      <Option ref={ref[0]} onClick={(event) => onClick(event, 0)}>
+      <Option ref={ref[a]} onClick={(event) => onClick(event, a)}>
         {question.a}
       </Option>
-      <Option ref={ref[1]} onClick={(event) => onClick(event, 1)}>
+      <Option ref={ref[b]} onClick={(event) => onClick(event, b)}>
         {question.b}
       </Option>
-      <Option ref={ref[2]} onClick={(event) => onClick(event, 2)}>
+      <Option ref={ref[c]} onClick={(event) => onClick(event, c)}>
         {question.c}
       </Option>
-      <Option ref={ref[3]} onClick={(event) => onClick(event, 3)}>
+      <Option ref={ref[d]} onClick={(event) => onClick(event, d)}>
         {question.d}
       </Option>
     </OptionsContainer>

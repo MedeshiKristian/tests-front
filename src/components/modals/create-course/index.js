@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react'
-import TemplateModal from '../index'
-import AuthInput from '../../ui/input'
-import { AuthButton, AuthForm } from '../../ui'
+import ConfirmationModal from '../confirmation'
+import { FormModal } from '../../ui'
+import AuthInput from '../../ui/auth-input'
 import { DocumentOutline } from 'react-ionicons'
 import { CourseService } from '../../../services'
 import { Context } from '../../../index'
-import { COLORS } from '../../values/colors'
 
-const CreateCourse = ({ setIsCreateCourseModal }) => {
+const CreateCourse = ({
+  isCreateCourseModal,
+  setIsCreateCourseModal
+}) => {
   const { coursesStore } = useContext(Context)
   const [courseData, setCourseData] = useState({
     name: ''
@@ -19,7 +21,6 @@ const CreateCourse = ({ setIsCreateCourseModal }) => {
       ...courseData,
       [name]: value,
     })
-    console.log(courseData)
   }
 
   const handleSubmit = (event) => {
@@ -33,20 +34,26 @@ const CreateCourse = ({ setIsCreateCourseModal }) => {
       .catch(error => {
         console.error(error)
       })
+    setCourseData({
+      ...courseData,
+      name: ''
+    })
   }
 
   return (
-    <TemplateModal title="Add course" close={() => setIsCreateCourseModal(false)}>
-      <AuthForm onSubmit={handleSubmit}>
+    <ConfirmationModal title="Add course"
+                       isConfirmationModal={isCreateCourseModal}
+                       setIsConfirmationModal={setIsCreateCourseModal}
+                       isSubmit={true}
+                       confirm={handleSubmit}>
+      <FormModal>
         <AuthInput name="name"
                    value={courseData.name}
                    placeholder="Course name"
                    onChange={handleCourseDataChange}
-                   BaseIcon={DocumentOutline}
-        />
-        <AuthButton type="submit" style={{ padding: '1.5vh 5vw', margin: '10px' }}>Submit</AuthButton>
-      </AuthForm>
-    </TemplateModal>
+                   BaseIcon={DocumentOutline}/>
+      </FormModal>
+    </ConfirmationModal>
   )
 }
 

@@ -1,9 +1,9 @@
 import { Container, Title, Wrapper } from './style'
 
-const TemplateModal = ({ children, title, close }) => {
+const BaseModal = ({ children, title, close, style }) => {
   return (
     <Wrapper onClick={close}>
-      <Container onClick={event => event.stopPropagation()}>
+      <Container style={style} onClick={event => event.stopPropagation()}>
         <Title>{title}</Title>
         {children}
       </Container>
@@ -11,4 +11,4 @@ const TemplateModal = ({ children, title, close }) => {
   )
 }
 
-export default TemplateModal
+export default BaseModal

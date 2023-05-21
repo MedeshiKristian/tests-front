@@ -1,15 +1,14 @@
 import React from 'react'
-import { Input, Wrapper } from './style'
+import { Input, Wrapper, ErrorMessage } from './style'
 import Icon from '../icon'
 import { EyeOffOutline, EyeOutline } from 'react-ionicons'
-import AuthError from '../error'
 
 const AuthInput = ({
   placeholder,
   name,
   value,
   type,
-  BaseIcon: baseIcon,
+  BaseIcon,
   onChange,
   visiblePassword,
   setVisiblePassword,
@@ -24,7 +23,7 @@ const AuthInput = ({
   return (
     <>
       <Wrapper>
-        <Icon BaseIcon={baseIcon}/>
+        <Icon BaseIcon={BaseIcon}/>
         <Input placeholder={placeholder}
                name={name}
                type={type}
@@ -37,7 +36,15 @@ const AuthInput = ({
             :
             <Icon BaseIcon={EyeOffOutline} onClick={changePasswordType}/>)}
       </Wrapper>
-      <AuthError show={showError} onShow={onShowError} onHide={onHideError}></AuthError>
+      {showError ?
+        (<ErrorMessage style={{ whiteSpace: 'pre-wrap' }}>
+          {onShowError}
+        </ErrorMessage>)
+        :
+        (<ErrorMessage style={{ whiteSpace: 'pre-wrap', color: 'green' }}>
+          {onHideError}
+        </ErrorMessage>)
+      }
     </>
   )
 }

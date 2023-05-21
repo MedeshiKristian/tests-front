@@ -3,11 +3,11 @@ import { COLORS } from '../../values/colors'
 
 export const Wrapper = styled.div`
   display: flex;
-  border: 1px solid ${COLORS.primaryVariant};
   height: 100%;
   width: 100%;
   padding: 10px;
   margin: 10px 0 0 0;
+  border: 1px solid ${COLORS.borderColor};
   border-radius: 7px;
   align-items: center;
 `
@@ -33,4 +33,14 @@ export const Input = styled.input`
   &:focus {
     outline: 0;
   }
+`
+
+export const ErrorMessage = styled.span`
+  color: red;
+  font-size: 14px;
+  text-align: left;
+  margin-top: auto;
+  margin-right: auto;
+  padding: 0;
+  height: 14px;
 `

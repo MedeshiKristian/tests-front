@@ -1,12 +1,16 @@
 import React, { useContext, useState } from 'react'
-import TemplateModal from '../index'
-import AuthInput from '../../ui/input'
-import { AuthButton, AuthForm } from '../../ui'
+import AuthInput from '../../ui/auth-input'
+import { FormModal, RoundButton } from '../../ui'
 import { DocumentOutline } from 'react-ionicons'
 import { Context } from '../../../index'
 import { TestService } from '../../../services'
+import ConfirmationModal from '../confirmation'
 
-const CreateTest = ({ courseID, setIsCreateTestModal }) => {
+const CreateTest = ({
+  courseID,
+  isCreateTestModal,
+  setIsCreateTestModal
+}) => {
   const { testsStore } = useContext(Context)
   const [testData, setTestData] = useState({
     course_id: courseID,
@@ -14,6 +18,7 @@ const CreateTest = ({ courseID, setIsCreateTestModal }) => {
   })
 
   const handleTestDataChange = (event) => {
+    event.preventDefault()
     const { name, value } = event.target
     setTestData({
       ...testData,
@@ -33,20 +38,26 @@ const CreateTest = ({ courseID, setIsCreateTestModal }) => {
       .catch(error => {
         console.error(error)
       })
+    setTestData({
+      ...testData,
+      topic: ''
+    })
   }
 
   return (
-    <TemplateModal title="Add test" close={() => setIsCreateTestModal(false)}>
-      <AuthForm onSubmit={handleSubmit}>
+    <ConfirmationModal title="Add test"
+                       isConfirmationModal={isCreateTestModal}
+                       setIsConfirmationModal={setIsCreateTestModal}
+                       isSubmit={true}
+                       confirm={handleSubmit}>
+      <FormModal>
         <AuthInput name="topic"
                    value={testData.topic}
                    placeholder="Test topic"
                    onChange={handleTestDataChange}
-                   BaseIcon={DocumentOutline}
-        />
-        <AuthButton type="submit" style={{ padding: '1.5vh 5vw', margin: '10px' }}>Submit</AuthButton>
-      </AuthForm>
-    </TemplateModal>
+                   BaseIcon={DocumentOutline}/>
+      </FormModal>
+    </ConfirmationModal>
   )
 }
 

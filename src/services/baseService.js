@@ -3,19 +3,19 @@ import axios from './base'
 const BaseService = (url) => {
   return {
     async create (data) {
-      return await axios.post(url, data)
+      return axios.post(url, data)
     },
     async fetch () {
-      return await axios.get(url)
+      return axios.get(url)
     },
     async get (id) {
-      return await axios.get(`${url}/${id}`)
+      return axios.get(`${url}/${id}`)
     },
     async edit (id, data) {
-      return await axios.patch(`${url}/${id}`, data)
+      return axios.patch(`${url}/${id}`, data)
     },
     async delete (id) {
-      return await axios.delete(`${url}/${id}`)
+      return axios.delete(`${url}/${id}`)
     },
   }
 }

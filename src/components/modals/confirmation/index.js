@@ -1,12 +1,35 @@
 import React from 'react'
-import TemplateModal from '../index'
+import BaseModal from '../index'
 import { Title } from '../style'
+import { RoundButton } from '../../ui'
 
-const ConfirmationModal = ({ title }) => {
+const ConfirmationModal = ({
+  title,
+  confirm,
+  isConfirmationModal,
+  setIsConfirmationModal,
+  isSubmit,
+  children
+}) => {
   return (
-    <TemplateModal>
-      <Title>title</Title>
-    </TemplateModal>
+    <>
+      {isConfirmationModal &&
+        <BaseModal close={() => setIsConfirmationModal(false)}>
+          <Title>{title}</Title>
+          {children}
+          {isSubmit ?
+            <RoundButton onClick={confirm} style={{ padding: '1.5vh 5vw', margin: '10px' }}>Submit</RoundButton>
+            :
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <RoundButton onClick={() => {
+                confirm()
+                setIsConfirmationModal(false)
+              }}>OK</RoundButton>
+              <RoundButton onClick={() => setIsConfirmationModal(false)}>Cancel</RoundButton>
+            </div>
+          }
+        </BaseModal>}
+    </>
   )
 }
 

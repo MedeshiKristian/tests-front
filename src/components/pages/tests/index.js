@@ -2,93 +2,72 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CourseService, TestService } from '../../../services'
 import { Context } from '../../../index'
 import { observer } from 'mobx-react-lite'
-import { useNavigate, useParams } from 'react-router-dom'
-import { CardButton, ListItem, ListWrapper, List } from '../../ui'
+import { useParams } from 'react-router-dom'
+import { ListItem, ListWrapper, List, Pagination, SearchBar } from '../../ui'
 import CreateTest from '../../modals/create-test'
+import Test from './test'
 
 const Tests = observer(() => {
   const { userStore, testsStore } = useContext(Context)
   const [isCreateTestModal, setIsCreateTestModal] = useState(false)
   const params = useParams()
-  const navigate = useNavigate()
+  const testsPerPage = 5
+  const [page, setPage] = useState(1)
+  const [pageTests, setPageTests] = useState([])
+  const [countItems, setCountItems] = useState(0)
+  const [filteredTests, setFilteredTests] = useState([])
 
   useEffect(() => {
     CourseService.get(params.course_id)
       .then(response => {
         console.log(response.data)
         testsStore.set(response.data.tests)
+        for (let i = 0; i < 100; i++) {
+          testsStore.add({ topic: `Test ${i}` })
+        }
+        setPage(1)
       })
       .catch(error => {
         console.error(error)
       })
-  }, [testsStore])
+  }, [params.course_id, testsStore])
 
   const handleTestAdding = (event) => {
     event.preventDefault()
     setIsCreateTestModal(true)
   }
 
-  const handleTestShow = (event, id) => {
-    event.preventDefault()
-    try {
-      navigate(`/${id}`)
-    } catch (error) {
-      console.error(error)
+  const predicate = (test, text) => {
+    if (text === '') {
+      return true
     }
-  }
-
-  const handleTestStart = (event, id) => {
-    event.preventDefault()
-    try {
-      navigate(`/test/${id}`)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  const handleCourseDelete = (event, id) => {
-    event.preventDefault()
-    TestService.delete(id)
-      .then(response => {
-        console.log(response)
-        testsStore.delete(id)
-      })
-      .catch(error => {
-        console.error(error)
-      })
+    return test.topic.toLowerCase().includes(text.toLowerCase())
   }
 
   return (
-    <ListWrapper>
-      <List>
-        {testsStore.data.map((test) => (
-          <ListItem title={test.topic}>
-            <CardButton onClick={(event) => handleTestStart(event, test.id, test.topic)}>Start Test</CardButton>
-            {userStore.isAdmin &&
-              <>
-                <CardButton onClick={(event) => handleTestShow(event, test.id)}>
-                  Show Test
-                </CardButton>
-                <CardButton onClick={(event) => handleCourseDelete(event, test.id)}>
-                  Delete Test
-                </CardButton>
-              </>}
-          </ListItem>
-        ))}
-        {userStore.isAdmin && <ListItem title={'Add Test'} onClick={handleTestAdding}/>}
-        {(() => {
-          const cards = []
-          for (let i = 0; i < 10; i++) {
-            cards.push(
-              <ListItem title={'Test'}>
-                <CardButton>Start Test</CardButton>
-              </ListItem>)
-          }
-          return cards
-        })()}
-      </List>
-      {isCreateTestModal && <CreateTest courseID={params.course_id} setIsCreateTestModal={setIsCreateTestModal}/>}
-    </ListWrapper>
+    <>
+      <ListWrapper>
+        <SearchBar predicate={predicate}
+                   store={testsStore}
+                   setFilteredStore={setFilteredTests}
+                   setPage={setPage}/>
+        <List>
+          {pageTests.map((test) => (
+            <Test test={test} key={test.id}></Test>
+          ))}
+          {userStore.isAdmin && <ListItem title={'Add Test'} onClick={handleTestAdding}/>}
+        </List>
+        <CreateTest courseID={params.course_id}
+                    isCreateTestModal={isCreateTestModal}
+                    setIsCreateTestModal={setIsCreateTestModal}/>
+      </ListWrapper>
+      <Pagination itemPerPage={testsPerPage}
+                  countItems={countItems}
+                  setPage={setPage}
+                  page={page}
+                  data={filteredTests}
+                  setPageItems={setPageTests}/>
+    </>
   )
 })
 

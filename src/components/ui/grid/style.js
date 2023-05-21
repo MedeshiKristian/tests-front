@@ -5,23 +5,23 @@ export const GridWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5vh 10vw;
-  width: auto;
+  width: 85%;
   height: auto;
+
+  //border: 2px solid black;
 `
 
 export const Grid = styled.div`
   display: grid;
-  //background: white;
   align-items: center;
   justify-content: center;
-  grid-column-gap: 20px;
   grid-row-gap: 15px;
+  grid-column-gap: 7%;
   height: 100%;
   width: 100%;
   margin: 20px 0;
   
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   
   @media screen and (max-width: 1280px) {
     grid-template-columns: repeat(4, 1fr);
@@ -36,6 +36,9 @@ export const Grid = styled.div`
   }
 
   @media screen and (max-width: 540px) {
-    grid-template-columns: repeat(1, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `

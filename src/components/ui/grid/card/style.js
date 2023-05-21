@@ -3,14 +3,10 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  //justify-content: center;
   box-shadow: 0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.5);
-  //background-color: white;
   border-radius: 5px;
-  //padding: 0;
   padding: 5px 15px;
-  height: 270px;
-  width: 200px;
+  width: auto;
   transition: all .5s ease-in-out;
   z-index: 0;
   
@@ -23,7 +19,6 @@ export const Wrapper = styled.div`
     display: flex;
     width: auto;
     align-items: center;
-    //background-color: red;
     padding: 0;
   }
 
@@ -46,6 +41,11 @@ export const Wrapper = styled.div`
     width: 70%;
     flex-direction: column;
   }
+
+  @media screen and (max-width: 540px) {
+    width: 80%;
+    aspect-ratio: 4 / 5;
+  }
   
   //&:hover .actions {
   //  display: flex;
@@ -61,7 +61,12 @@ export const Wrapper = styled.div`
 
 export const Logo = styled.div`
   //padding: 20px;
-  margin: 20px;
+  margin: 20%;
+  
+  //@media screen and (max-width: 540px) {
+  //  display: none;
+  //}
+  
 `
 
 export const CardActions = styled.div`

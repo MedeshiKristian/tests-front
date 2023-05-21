@@ -1,8 +1,8 @@
 export const COLORS = {
-  primary: 'white ',
-  primaryVariant: '#3d9a9b',
-  // primaryVariant: '#006bbb',
-  // primaryVariant: '#5bff51',
+  main: 'white',
+  borderColor: '#3d9a9b',
+  // borderColor: '#006bbb',
+  // borderColor: '#5bff51',
   // onPrimary: '',
 
   // secondary: '',
