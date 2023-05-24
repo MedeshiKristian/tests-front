@@ -3,20 +3,23 @@ import { BrowserRouter } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import AppRouter from '../router'
 import { useContext, useEffect } from 'react'
-import { Context } from '../../index'
 import Footer from './footer'
 import { Wrapper } from './style'
+import { StoreContext } from '../context/store-context'
+import { ThemeContext } from '../context/theme-context'
 
 const App = observer(() => {
-  const { userStore } = useContext(Context)
+  const { userStore } = useContext(StoreContext)
+
+  const { theme } = useContext(ThemeContext)
 
   useEffect(() => {
-    userStore.checkStorage()
-  }, [userStore])
+    userStore.checkAuth()
+  }, [])
 
   return (
     <BrowserRouter>
-      <Wrapper>
+      <Wrapper theme={theme}>
         <Header/>
         <AppRouter/>
         <Footer/>

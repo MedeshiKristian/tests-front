@@ -22,8 +22,8 @@ const ConfirmationModal = ({
             :
             <div style={{ display: 'flex', flexDirection: 'row' }}>
               <RoundButton onClick={() => {
-                confirm()
                 setIsConfirmationModal(false)
+                confirm()
               }}>OK</RoundButton>
               <RoundButton onClick={() => setIsConfirmationModal(false)}>Cancel</RoundButton>
             </div>

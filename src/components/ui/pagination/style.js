@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { COLORS } from '../../values/colors'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -6,6 +7,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   height: 50px;
   width: 100%;
+  margin: 10px;
 `
 
 export const PageButton = styled.div`
@@ -23,6 +25,9 @@ export const PageButton = styled.div`
   z-index: 0;
 
   user-select: none;
+  
+  background: ${props => props.theme === 'light' ? COLORS.firstLight : COLORS.firstDark};
+  
 
   //&:hover {
   //  transform: scale(1.01);

@@ -7,7 +7,7 @@ export default class UserStore {
     makeAutoObservable(this)
   }
 
-  checkStorage() {
+  checkAuth() {
     const token = localStorage.getItem('token')
     if (token) {
       this.setIsAuth(true)

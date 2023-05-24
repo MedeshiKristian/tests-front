@@ -1,20 +1,22 @@
 import React, { useContext, useState } from 'react'
-import { NavBar, Logo, Container, NavLink, Wrapper } from './style.js'
+import { NavBar, Logo, Container, NavLink, Wrapper, ThemeToggle } from './style.js'
 import SignIn from '../../modals/sign-in'
 import SignUp from '../../modals/sign-up'
 import { RoundButton } from '../../ui'
 import { AuthService } from '../../../services'
-import { Context } from '../../../index'
 import { observer } from 'mobx-react-lite'
-import { SchoolOutline } from 'react-ionicons'
+import { MoonOutline, SchoolOutline, SunnyOutline } from 'react-ionicons'
 import { COLORS } from '../../values/colors'
 import * as PropTypes from 'prop-types'
+import {COURSES_PATH, getUserResultsPath, USER_RESULTS_PATH} from "../../router";
+import { StoreContext } from '../../context/store-context'
+import { ThemeContext } from '../../context/theme-context'
 
 const Header = observer(() => {
-  const { userStore } = useContext(Context)
-
+  const { userStore } = useContext(StoreContext)
   const [isSignUpModal, setIsSignUpModal] = useState(false)
   const [isSignInModal, setIsSignInModal] = useState(false)
+  const { theme, toggleTheme } = useContext(ThemeContext)
 
   const handleSignOut = (event) => {
     event.preventDefault()
@@ -30,7 +32,7 @@ const Header = observer(() => {
 
   return (
     <>
-      <Container>
+      <Container theme={theme}>
         <Wrapper>
           <Logo to="/">
             <SchoolOutline color={COLORS.borderColor}
@@ -38,6 +40,11 @@ const Header = observer(() => {
                            width="auto"/>
           </Logo>
           <NavBar>
+            <ThemeToggle>
+            {theme === 'light' ?
+              (<SunnyOutline onClick={toggleTheme}/>)
+              : (<MoonOutline onClick={toggleTheme} color="white"/>)}
+            </ThemeToggle>
             {!userStore.isAuth ?
               <>
                 <RoundButton onClick={() => setIsSignUpModal(true)}>Sign up</RoundButton>
@@ -46,9 +53,8 @@ const Header = observer(() => {
               :
               <>
                 {/*{userStore?.user?.email}*/}
-                <NavLink to="/">Courses</NavLink>
-                <NavLink to="/results">My results</NavLink>
-                {/*<NavLink to="/"*/}
+                <NavLink to={COURSES_PATH} theme={theme}>Courses</NavLink>
+                <NavLink to={getUserResultsPath(userStore.user.id)} theme={theme}>My results</NavLink>
                 <RoundButton onClick={handleSignOut}>Sign Out</RoundButton>
               </>
             }

@@ -1,15 +1,7 @@
 import styled from 'styled-components'
+import { COLORS } from '../../values/colors'
 
 export const ListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 85%;
-  height: 100%;
-`
-
-export const List = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.5);
@@ -20,4 +12,5 @@ export const List = styled.div`
   width: 100%;
   padding: 50px 0 30px 0;
   margin: 20px 0;
+  background: ${props => props.theme === 'light' ? COLORS.firstLight : COLORS.firstDark};
 `

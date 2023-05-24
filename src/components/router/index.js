@@ -1,40 +1,58 @@
 import React, { useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Courses from '../pages/courses'
-import Tests from '../pages/tests'
+import CourseTests from '../pages/course-tests'
 import Testing from '../pages/testing'
-import Result from '../pages/result'
-import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
-import Results from '../pages/results'
+import UserResults from '../pages/user-results'
+import Result from '../pages/result'
+import TestQuestions from '../pages/test-questions'
+import { Wrapper } from './style'
+import TestResults from "../pages/test-results";
+import { StoreContext } from '../context/store-context'
 
-const COURSES_PATH = '/'
+export const COURSES_PATH = '/'
 
-const TESTS_PATH = '/course/:course_id'
+export const getCourseTestsPath = (id = ':course_id') => {
+  return `/course/${id}/tests`
+}
 
-const TESTING_PATH = '/test/:test_id'
+export const getTestingPath = (id = ':test_id') => {
+  return `/testing/${id}`
+}
 
-const RESULTS_PATH = '/results'
+export const getUserResultsPath = (id = ':user_id') => {
+  return `/user/${id}/results`
+}
 
-const RESULT_PATH = '/result/:result_id'
+export const getTestResultsPath = (id = ':test_id') => {
+  return `/tests/${id}/results`
+}
 
-const TEST_RESULTS_PATH = 'test/:test_id/results/'
+export const getResultPath = (id = ':result_id') => {
+  return `/results/${id}`
+}
+
+export const getTestQuestionsPath = (id = ':test_id') => {
+  return `/test/${id}`
+}
 
 const AppRouter = observer(() => {
-  const { userStore } = useContext(Context)
+  const { userStore } = useContext(StoreContext)
 
   return (
-    <>
+    <Wrapper>
       {userStore.isAuth &&
         <Routes>
-          <Route path={`${COURSES_PATH}`} element={<Courses/>}/>
-          <Route path={`${TESTS_PATH}`} element={<Tests/>}/>
-          <Route path={`${TESTING_PATH}`} element={<Testing/>}/>
-          <Route path={`${RESULTS_PATH}`} element={<Results/>}/>
-          <Route path={`${RESULT_PATH}`} element={<Result/>}/>
+          <Route path={COURSES_PATH} element={<Courses/>}/>
+          <Route path={getCourseTestsPath()} element={<CourseTests/>}/>
+          <Route path={getTestingPath()} element={<Testing/>}/>
+          <Route path={getUserResultsPath()} element={<UserResults/>}/>
+          <Route path={getTestResultsPath()} element={<TestResults/>}/>
+          <Route path={getResultPath()} element={<Result/>}/>
+          <Route path={getTestQuestionsPath()} element={<TestQuestions/>}/>
         </Routes>}
-      {/*<Navigate to="/"/>*/}
-    </>
+    </Wrapper>
   )
 })
 

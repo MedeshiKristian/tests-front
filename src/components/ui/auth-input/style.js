@@ -10,6 +10,8 @@ export const Wrapper = styled.div`
   border: 1px solid ${COLORS.borderColor};
   border-radius: 7px;
   align-items: center;
+  background: ${props => props.theme === 'light' ? COLORS.firstLight : COLORS.firstDark};
+  color: ${props => props.theme === 'light' ? COLORS.textLight : COLORS.textDark};
 `
 
 export const Input = styled.input`

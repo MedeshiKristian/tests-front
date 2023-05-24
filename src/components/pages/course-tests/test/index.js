@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react'
 import { SquareButton, ListItem } from '../../../ui'
-import { Context } from '../../../../index'
 import { TestService } from '../../../../services'
 import { useNavigate } from 'react-router-dom'
 import ConfirmationModal from '../../../modals/confirmation'
+import { getTestingPath, getTestQuestionsPath, getTestResultsPath } from '../../../router'
+import { observer } from 'mobx-react-lite'
+import { StoreContext } from '../../../context/store-context'
 
-const Test = ({ test }) => {
-  const { userStore, testsStore } = useContext(Context)
+const Test = observer(({ test }) => {
+  const { userStore, testsStore } = useContext(StoreContext)
 
   const navigate = useNavigate()
 
@@ -16,20 +18,17 @@ const Test = ({ test }) => {
 
   const handleTestShow = (event, id) => {
     event.preventDefault()
-    try {
-      // TODO Navigate to page with questions
-    } catch (error) {
-      console.error(error)
-    }
+    navigate(getTestQuestionsPath(id))
+  }
+
+  const handleShowResults = (event, id) => {
+    event.preventDefault()
+    navigate(getTestResultsPath(id))
   }
 
   const handleTestStart = (event, id) => {
     event.preventDefault()
-    try {
-      navigate(`/test/${id}`)
-    } catch (error) {
-      console.error(error)
-    }
+    navigate(getTestingPath(id))
   }
 
   const handleTestDelete = (id) => {
@@ -55,20 +54,21 @@ const Test = ({ test }) => {
             <SquareButton onClick={(event) => handleTestShow(event, test.id)}>
               Show Test
             </SquareButton>
+            <SquareButton onClick={(event) => handleShowResults(event, test.id)}>
+              Show results
+            </SquareButton>
             <SquareButton onClick={() => setIsConfirmationModal(true)}>
               Delete Test
             </SquareButton>
           </>}
       </ListItem>
-      {isConfirmationModal &&
-        <ConfirmationModal title={CONFIRM_TEST_DELETING_TITLE}
-                           confirm={() => handleTestDelete(test.id)}
-                           isConfirmationModal={isConfirmationModal}
-                           setIsConfirmationModal={setIsConfirmationModal}
-                           isSubmit={false}
-        />}
+      {<ConfirmationModal title={CONFIRM_TEST_DELETING_TITLE}
+                          confirm={() => handleTestDelete(test.id)}
+                          isConfirmationModal={isConfirmationModal}
+                          setIsConfirmationModal={setIsConfirmationModal}
+                          isSubmit={false}/>}
     </>
   )
-}
+})
 
 export default Test

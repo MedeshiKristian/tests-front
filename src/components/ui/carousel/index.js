@@ -48,7 +48,7 @@ export const Carousel = ({ children, infinite, slide, setSlide }) => {
     if (transitionDuration === 0) {
       setTimeout(() => {
         setTransitionDuration(TRANSITION_DURATION)
-      }, TRANSITION_DURATION + TRANSITION_DURATION / 2)
+      }, TRANSITION_DURATION)
     }
   }, [transitionDuration])
 
@@ -56,25 +56,27 @@ export const Carousel = ({ children, infinite, slide, setSlide }) => {
     if (!infinite) return
 
     if (offset === 0) {
-      console.log('from last to first')
+      // console.log('from last to first')
       setTimeout(() => {
         setTransitionDuration(0)
         setOffset(-(width * (pages.length - 1 - clonesCount.tail)))
-      }, TRANSITION_DURATION + TRANSITION_DURATION / 2)
+      }, TRANSITION_DURATION)
       return
     }
 
     if (offset === -(width * (pages.length - 1))) {
-      console.log('from first to last')
+      // console.log('from first to last')
       setTimeout(() => {
         setTransitionDuration(0)
         setOffset(-(clonesCount.head * width))
-      }, TRANSITION_DURATION + TRANSITION_DURATION / 2)
+      }, TRANSITION_DURATION)
     }
   }, [offset, infinite, pages, clonesCount, width])
 
   useEffect(() => {
-    setOffset(-(slide * width))
+    setTimeout(() => {
+      setOffset(-(slide * width))
+    }, TRANSITION_DURATION)
   }, [slide])
 
   const handleLeftArrowClick = (event) => {
@@ -99,6 +101,7 @@ export const Carousel = ({ children, infinite, slide, setSlide }) => {
   useEffect(() => {
     if (infinite) {
       setOffset(-(width * (pages.length - 1)))
+      setSlide(1)
     }
   }, [width])
 

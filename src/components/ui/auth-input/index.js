@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Input, Wrapper, ErrorMessage } from './style'
 import Icon from '../icon'
 import { EyeOffOutline, EyeOutline } from 'react-ionicons'
+import { ThemeContext } from '../../context/theme-context'
 
 const AuthInput = ({
   placeholder,
@@ -20,16 +21,17 @@ const AuthInput = ({
     setVisiblePassword(!visiblePassword)
   }
 
+  const {theme} = useContext(ThemeContext)
+
   return (
     <>
-      <Wrapper>
-        <Icon BaseIcon={BaseIcon}/>
+      <Wrapper theme={theme}>
+        {BaseIcon && <Icon BaseIcon={BaseIcon}/>}
         <Input placeholder={placeholder}
                name={name}
                type={type}
                value={value}
-               onChange={onChange}
-        />
+               onChange={onChange}/>
         {visiblePassword != null &&
           (visiblePassword ?
             <Icon BaseIcon={EyeOutline} onClick={changePasswordType}/>

@@ -1,16 +1,5 @@
 import styled from 'styled-components'
 
-export const GridWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 85%;
-  height: auto;
-
-  //border: 2px solid black;
-`
-
 export const Grid = styled.div`
   display: grid;
   align-items: center;

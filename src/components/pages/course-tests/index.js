@@ -1,30 +1,31 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { CourseService, TestService } from '../../../services'
-import { Context } from '../../../index'
+import { CourseService } from '../../../services'
 import { observer } from 'mobx-react-lite'
 import { useParams } from 'react-router-dom'
-import { ListItem, ListWrapper, List, Pagination, SearchBar } from '../../ui'
+import { ListItem, List, Pagination, SearchBar } from '../../ui'
 import CreateTest from '../../modals/create-test'
 import Test from './test'
+import { StoreContext } from '../../context/store-context'
+import { ThemeContext } from '../../context/theme-context'
 
-const Tests = observer(() => {
-  const { userStore, testsStore } = useContext(Context)
+const CourseTests = observer(() => {
+  const { userStore, testsStore } = useContext(StoreContext)
   const [isCreateTestModal, setIsCreateTestModal] = useState(false)
   const params = useParams()
   const testsPerPage = 5
   const [page, setPage] = useState(1)
   const [pageTests, setPageTests] = useState([])
-  const [countItems, setCountItems] = useState(0)
   const [filteredTests, setFilteredTests] = useState([])
+  const { theme } = useContext(ThemeContext)
 
   useEffect(() => {
     CourseService.get(params.course_id)
       .then(response => {
         console.log(response.data)
         testsStore.set(response.data.tests)
-        for (let i = 0; i < 100; i++) {
-          testsStore.add({ topic: `Test ${i}` })
-        }
+        // for (let i = 0; i < 100; i++) {
+        //   testsStore.add({ topic: `Test ${i}` })
+        // }
         setPage(1)
       })
       .catch(error => {
@@ -46,23 +47,19 @@ const Tests = observer(() => {
 
   return (
     <>
-      <ListWrapper>
-        <SearchBar predicate={predicate}
-                   store={testsStore}
-                   setFilteredStore={setFilteredTests}
-                   setPage={setPage}/>
-        <List>
-          {pageTests.map((test) => (
-            <Test test={test} key={test.id}></Test>
-          ))}
-          {userStore.isAdmin && <ListItem title={'Add Test'} onClick={handleTestAdding}/>}
-        </List>
-        <CreateTest courseID={params.course_id}
-                    isCreateTestModal={isCreateTestModal}
-                    setIsCreateTestModal={setIsCreateTestModal}/>
-      </ListWrapper>
+      <SearchBar predicate={predicate}
+                 store={testsStore}
+                 setFilteredStore={setFilteredTests}
+                 setPage={setPage}/>
+      <List theme={theme}>
+        {pageTests.map((test) => (
+          <Test test={test} key={test.id}></Test>
+        ))}
+        {userStore.isAdmin && <ListItem title={'Add Test'} onClick={handleTestAdding}/>}
+      </List>
+      <CreateTest isCreateTestModal={isCreateTestModal}
+                  setIsCreateTestModal={setIsCreateTestModal}/>
       <Pagination itemPerPage={testsPerPage}
-                  countItems={countItems}
                   setPage={setPage}
                   page={page}
                   data={filteredTests}
@@ -71,4 +68,4 @@ const Tests = observer(() => {
   )
 })
 
-export default Tests
+export default CourseTests

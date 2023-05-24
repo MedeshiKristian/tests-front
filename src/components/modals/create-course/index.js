@@ -4,13 +4,14 @@ import { FormModal } from '../../ui'
 import AuthInput from '../../ui/auth-input'
 import { DocumentOutline } from 'react-ionicons'
 import { CourseService } from '../../../services'
-import { Context } from '../../../index'
+
+import { StoreContext } from '../../context/store-context'
 
 const CreateCourse = ({
   isCreateCourseModal,
   setIsCreateCourseModal
 }) => {
-  const { coursesStore } = useContext(Context)
+  const { coursesStore } = useContext(StoreContext)
   const [courseData, setCourseData] = useState({
     name: ''
   })

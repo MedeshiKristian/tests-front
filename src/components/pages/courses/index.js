@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { CourseService } from '../../../services'
-import { Context } from '../../../index'
 import { observer } from 'mobx-react-lite'
 import { GridWrapper, Grid, Card, Pagination, SearchBar } from '../../ui'
 import Course from './course'
 import CreateCourse from '../../modals/create-course'
+import { StoreContext } from '../../context/store-context'
 
 const Courses = observer(() => {
-  const { userStore, coursesStore } = useContext(Context)
+  const { userStore, coursesStore } = useContext(StoreContext)
 
   const [isCreateCourseModal, setIsCreateCourseModal] = useState(false)
 
@@ -24,7 +24,7 @@ const Courses = observer(() => {
       .then(response => {
         console.log('response', response.data)
         coursesStore.set(response.data)
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 50; i++) {
           coursesStore.add({ name: `Course ${i}` })
         }
         setPage(1)
@@ -49,7 +49,6 @@ const Courses = observer(() => {
 
   return (
     <>
-      <GridWrapper>
         <SearchBar predicate={predicate}
                    store={coursesStore}
                    filteredStore={filteredCourses}
@@ -64,7 +63,6 @@ const Courses = observer(() => {
         <CreateCourse
           isCreateCourseModal={isCreateCourseModal}
           setIsCreateCourseModal={setIsCreateCourseModal}/>
-      </GridWrapper>
       <Pagination itemPerPage={coursesPerPage}
                   setPage={setPage}
                   page={page}

@@ -11,7 +11,8 @@ export const Container = styled.div`
 
 export const Window = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
+  padding: 10px;
   overflow: hidden;
 `
 

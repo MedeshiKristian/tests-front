@@ -3,6 +3,8 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  background: ${props => props.theme === 'light' ? "white" : "#2B2C37"};
+  
   box-shadow: 0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   padding: 5px 15px;

@@ -1,16 +1,18 @@
-export { RoundButton, SquareButton } from './buttons/style'
+export { default as RoundButton } from './buttons/round'
+
+export { default as SquareButton } from './buttons/square'
 
 export { FormModal } from './form/style'
 
 export { default as AuthInput } from './auth-input'
 
-export { GridWrapper, Grid } from './grid/style'
+export { Grid } from './grid/style'
 
 export { default as Card } from './grid/card'
 
 export { default as ListItem } from './list/list-item'
 
-export { ListWrapper, List } from './list/style'
+export { default as List } from './list/'
 
 export { default as Pagination } from './pagination'
 

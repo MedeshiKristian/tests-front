@@ -22,9 +22,9 @@ export const Input = styled.input`
   border: 0;
   padding: 0;
   margin: 0 0 0 10px;
-  &:hover {
-    cursor: pointer;
-  }
+  background: ${props => props.theme === 'light' ? COLORS.firstLight : COLORS.firstDark};
+  color: ${props => props.theme === 'light' ? COLORS.textLight : COLORS.textDark};
+  transition: all .5s ease-in-out;
 
   &:focus {
     outline: 0;

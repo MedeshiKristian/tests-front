@@ -1,13 +1,13 @@
 export const COLORS = {
-  main: 'white',
   borderColor: '#3d9a9b',
-  // borderColor: '#006bbb',
-  // borderColor: '#5bff51',
-  // onPrimary: '',
 
-  // secondary: '',
-  // secondaryVariant: '',
-  // onSecondary: '',
+  firstLight: '#FFFFFF',
+  secondLight: '#F4F7FD',
+  textLight: '#000000',
+
+  firstDark: "#2B2C37",
+  secondDark: '#20212C',
+  textDark: '#FFFFFF',
 
   iconColor: '#5bff51'
 }

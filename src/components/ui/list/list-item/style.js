@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { COLORS } from '../../../values/colors'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -11,7 +12,8 @@ export const Wrapper = styled.div`
   height: auto;
   margin: 5px;
   padding: 10px;
-
+  background: ${props => props.theme === 'light' ? COLORS.secondLight : COLORS.secondDark};
+  
   transition: all .5s ease-in-out;
 
   &:hover {

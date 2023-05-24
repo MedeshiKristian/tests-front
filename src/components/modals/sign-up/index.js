@@ -2,14 +2,13 @@ import { FormModal, RoundButton } from '../../ui'
 import BaseModal from '../index'
 import { useContext, useEffect, useState } from 'react'
 import { AuthService } from '../../../services'
-import { Context } from '../../../index'
 import AuthInput from '../../ui/auth-input'
 import { LockClosedOutline, MailOutline } from 'react-ionicons'
 import { COLORS } from '../../values/colors'
-import ConfirmationModal from '../confirmation'
+import { StoreContext } from '../../context/store-context'
 
 const SignUp = ({ setIsSignUpModal, setIsSignInModal }) => {
-  const { userStore } = useContext(Context)
+  const { userStore } = useContext(StoreContext)
   const [emailError, setEmailError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('')

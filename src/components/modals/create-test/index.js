@@ -1,20 +1,22 @@
 import React, { useContext, useState } from 'react'
 import AuthInput from '../../ui/auth-input'
 import { FormModal, RoundButton } from '../../ui'
-import { DocumentOutline } from 'react-ionicons'
-import { Context } from '../../../index'
+import { DocumentOutline, TimeOutline } from 'react-ionicons'
 import { TestService } from '../../../services'
 import ConfirmationModal from '../confirmation'
+import { useParams } from 'react-router-dom'
+import { StoreContext } from '../../context/store-context'
 
 const CreateTest = ({
-  courseID,
   isCreateTestModal,
   setIsCreateTestModal
 }) => {
-  const { testsStore } = useContext(Context)
+  const params = useParams()
+  const { testsStore } = useContext(StoreContext)
   const [testData, setTestData] = useState({
-    course_id: courseID,
-    topic: ''
+    course_id: params.course_id,
+    topic: '',
+    deadline_seconds: ''
   })
 
   const handleTestDataChange = (event) => {
@@ -24,7 +26,7 @@ const CreateTest = ({
       ...testData,
       [name]: value,
     })
-    console.log(testData)
+    // console.log(testData)
   }
 
   const handleSubmit = (event) => {
@@ -40,7 +42,8 @@ const CreateTest = ({
       })
     setTestData({
       ...testData,
-      topic: ''
+      topic: '',
+      deadline_seconds: ''
     })
   }
 
@@ -56,6 +59,11 @@ const CreateTest = ({
                    placeholder="Test topic"
                    onChange={handleTestDataChange}
                    BaseIcon={DocumentOutline}/>
+        <AuthInput name="deadline_seconds"
+                   value={testData.deadline_seconds}
+                   placeholder="Duration"
+                   onChange={handleTestDataChange}
+                   BaseIcon={TimeOutline}/>
       </FormModal>
     </ConfirmationModal>
   )
