@@ -58,7 +58,7 @@ const Courses = observer(() => {
           {pageCourses.map((course) => (
             <Course course={course} key={course.id}/>
           ))}
-          {userStore.isAdmin && <Card title={'Add course'} onClick={handleCourseAdding}/>}
+          {userStore.isAdmin && <Card title={'Add'} onClick={handleCourseAdding}/>}
         </Grid>
         <CreateCourse
           isCreateCourseModal={isCreateCourseModal}

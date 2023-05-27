@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { COLORS } from '../../values/colors'
+import { COLORS } from '../../../constants/colors'
+import { TRANSITION_DURATION } from '../../../constants/globals'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ export const PageButton = styled.div`
   border-radius: 3px;
 
   cursor: pointer;
-  transition: all .5s ease-in-out;
+  transition: all ${TRANSITION_DURATION} ease-in-out;
   z-index: 0;
 
   user-select: none;

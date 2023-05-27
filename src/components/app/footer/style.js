@@ -1,6 +1,7 @@
 import styled from 'styled-components'
-import { COLORS } from '../../values/colors'
+import { COLORS } from '../../../constants/colors'
 import { Link } from 'react-router-dom'
+import { TRANSITION_DURATION } from '../../../constants/globals'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -13,12 +14,12 @@ export const Wrapper = styled.div`
   position: sticky;
   box-shadow: 0 6px 10px 5px rgba(0, 0, 0, 0.5);
   background: ${props => props.theme === 'light' ? COLORS.firstLight : COLORS.firstDark};
-  transition: all 0.5s ease-in-out;
+  transition: all 0${TRANSITION_DURATION} ease-in-out;
 `
 
 export const Container = styled.div`
   width: 85%;
-  color: grey;
+  color: ${COLORS.myGrey};
 `
 
 export const Row = styled.div`
@@ -52,7 +53,7 @@ export const Icon = styled.div`
     width: 100%;
     transform: scaleX(0);
     height: 1px;
-    background-color: ${COLORS.borderColor};
+    background-color: ${COLORS.color1};
     transform-origin: center;
     transition: transform 0.25s ease-out;
   }
@@ -70,6 +71,6 @@ export const Title = styled.h3`
 export const FooterLink = styled(Link)`
   margin-top: 10px;
   margin-left: 10px;
-  color: grey;
+  color: ${COLORS.myGrey};
   text-decoration: none;
 `

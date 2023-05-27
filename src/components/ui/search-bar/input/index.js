@@ -8,7 +8,7 @@ const SearchInput = ({ text, onChange}) => {
   const { theme } = useContext(ThemeContext)
 
   return (
-    <Wrapper>
+    <Wrapper theme={theme}>
       <Icon BaseIcon={SearchOutline}></Icon>
       <Input value={text} onChange={onChange} placeholder="Search..." theme={theme} className="input"/>
     </Wrapper>

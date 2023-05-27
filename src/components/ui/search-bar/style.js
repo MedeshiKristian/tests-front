@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { COLORS } from '../../values/colors'
+import { COLORS } from '../../../constants/colors'
+import { TRANSITION_DURATION } from '../../../constants/globals'
 
 export const Container = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const Container = styled.div`
   height: 100%;
   margin-top: 30px;
   margin-bottom: 10px;
-  transition: all .5s ease-in-out;
+  transition: all ${TRANSITION_DURATION} ease-in-out;
 
   background: ${props => props.theme === 'light' ? COLORS.firstLight : COLORS.firstDark};
   color: ${props => props.theme === 'light' ? COLORS.textLight : COLORS.textDark};

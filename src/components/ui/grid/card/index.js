@@ -1,8 +1,7 @@
-import React, { useContext } from 'react'
-import {CardActions, Logo, Wrapper} from './style'
+import React, { Children, useContext } from 'react'
+import { CardActions, Logo, Wrapper } from './style'
 import logo from '../../../../school-outline.svg'
 import { ThemeContext } from '../../../context/theme-context'
-
 
 const Card = ({ title, onClick, children, courseID }) => {
   const { theme } = useContext(ThemeContext)

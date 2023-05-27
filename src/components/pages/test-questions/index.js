@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { QuestionService, TestService } from '../../../services'
 import { Topic } from '../testing/style'
 import { AddOutline } from 'react-ionicons'
-import { COLORS } from '../../values/colors'
+import { COLORS } from '../../../constants/colors'
 import { observer } from 'mobx-react-lite'
 import CreateQuestion from '../../modals/create-question'
 import { StoreContext } from '../../context/store-context'
@@ -76,7 +76,7 @@ const TestQuestions = observer(() => {
         <QuestionWrapper key={-1}
                          style={{ margin: '10px', width: '90%', height: '300px', cursor: 'pointer' }}
                          onClick={() => setIsCreateQuestionModal(true)} theme={theme}>
-          <AddOutline color={COLORS.borderColor}
+          <AddOutline color={COLORS.color1}
                       height="70px"
                       width="auto"/>
         </QuestionWrapper>

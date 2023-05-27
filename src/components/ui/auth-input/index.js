@@ -31,7 +31,8 @@ const AuthInput = ({
                name={name}
                type={type}
                value={value}
-               onChange={onChange}/>
+               onChange={onChange}
+        theme={theme}/>
         {visiblePassword != null &&
           (visiblePassword ?
             <Icon BaseIcon={EyeOutline} onClick={changePasswordType}/>

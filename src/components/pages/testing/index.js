@@ -99,7 +99,7 @@ const Testing = observer(() => {
       answers: encodedAnswers
     })
       .then(response => {
-        console.log(response.data)
+        console.log(response)
       })
       .catch(error => {
         console.error(error)
@@ -155,7 +155,7 @@ const Testing = observer(() => {
       <Confirmation title={'Are you sure you want to save and submit answers?'}
                     isConfirmationModal={isConfirmationSubmit}
                     setIsConfirmationModal={setIsConfirmationSubmit}
-                    confirm={handleSubmit}/>
+                    confirm={() => setTimerSeconds(1)}/>
       <Confirmation title={'Are you sure you want reset timer and all answers?'}
                     confirm={restartTest}
                     isConfirmationModal={isConfirmationRestart}

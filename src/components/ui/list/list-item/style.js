@@ -1,20 +1,21 @@
 import styled from 'styled-components'
-import { COLORS } from '../../../values/colors'
+import { COLORS } from '../../../../constants/colors'
+import { TRANSITION_DURATION } from '../../../../constants/globals'
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   box-shadow: 0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.5);
-  background-color: white;
   border-radius: 5px;
   width: 90%;
   height: auto;
   margin: 5px;
   padding: 10px;
+  user-select: none;
   background: ${props => props.theme === 'light' ? COLORS.secondLight : COLORS.secondDark};
   
-  transition: all .5s ease-in-out;
+  transition: all ${TRANSITION_DURATION} ease-in-out;
 
   &:hover {
     transform: scale(1.005);

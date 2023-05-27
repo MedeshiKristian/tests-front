@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { COLORS } from '../../values/colors'
+import { COLORS } from '../../../constants/colors'
+import { TRANSITION_DURATION } from '../../../constants/globals'
 
 export const ListWrapper = styled.div`
   display: flex;
@@ -12,5 +13,7 @@ export const ListWrapper = styled.div`
   width: 100%;
   padding: 50px 0 30px 0;
   margin: 20px 0;
+  
+  transition: all ${TRANSITION_DURATION} ease-in-out;
   background: ${props => props.theme === 'light' ? COLORS.firstLight : COLORS.firstDark};
 `

@@ -46,12 +46,11 @@ const CreateQuestion = ({
     const answer = questionData.answer.toLowerCase()
     if (isError) return
     setIsCreateQuestionsModal(false)
-    setQuestionData({
+    let data = {
       ...questionData,
       'answer': questionData[answer]
-    })
-    console.log(questionData, answer)
-    QuestionService.create(questionData)
+    }
+    QuestionService.create(data)
       .then(response => {
         questionsStore.add(response.data)
         console.log(response)

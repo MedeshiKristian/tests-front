@@ -37,7 +37,7 @@ export const Question = observer(({
   const answer = answers[question.id]
 
   useEffect(() => {
-    if (answer !== undefined) {
+    if (answer) {
       markOption(ref[answer])
     } else if (previous) {
       unmarkOption(ref[previous])

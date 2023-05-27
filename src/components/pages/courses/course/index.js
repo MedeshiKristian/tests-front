@@ -35,11 +35,11 @@ const Course = observer(({ course }) => {
       <Card title={course.name} courseID={course.id} className="card">
         {course.id &&
           <SquareButton onClick={(event) => handleCourseShow(event, course.id)}>
-            Show Course
+            Show
           </SquareButton>}
         {userStore.isAdmin && course.id &&
           <SquareButton onClick={() => setIsConfirmationModal(true)}>
-            Delete Course
+            Delete
           </SquareButton>}
       </Card>
       <ConfirmationModal title={CONFIRM_COURSE_DELETING_TITLE}

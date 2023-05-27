@@ -5,7 +5,6 @@ import Confirmation from '../../../modals/confirmation'
 import { ResultService } from '../../../../services'
 import { observer } from 'mobx-react-lite'
 import { getResultPath } from '../../../router'
-import userResults from '../index'
 import { StoreContext } from '../../../context/store-context'
 
 export const decodeAnswers = (answers) => {
@@ -49,7 +48,7 @@ const Result = observer(({ item }) => {
         </SquareButton>
         {userStore.isAdmin &&
           <SquareButton onClick={() => setIsConfirmationModal(true)}>
-            Delete Result
+            Delete
           </SquareButton>}
         {/*{show-result-list.correct}*/}
       </ListItem>

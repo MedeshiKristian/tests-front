@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { List, ListWrapper } from '../../ui'
+import { List } from '../../ui'
 import { ResultService } from '../../../services'
 import Result from './result-list'
 import { observer } from 'mobx-react-lite'
@@ -20,10 +20,6 @@ const UserResults = observer(() => {
         console.error(error)
       })
   }, [params.user_id, userResultsStore])
-
-  useEffect(() => {
-    console.log('results change')
-  }, [userResultsStore.data])
 
   return (
     <List>

@@ -3,7 +3,7 @@ import BaseModal from '../index'
 import { useContext, useState } from 'react'
 import { AuthService } from '../../../services'
 import { LockClosedOutline, MailOutline } from 'react-ionicons'
-import { COLORS } from '../../values/colors'
+import { COLORS } from '../../../constants/colors'
 import { StoreContext } from '../../context/store-context'
 
 const SignIn = ({ setIsSignInModal, setIsSignUpModal }) => {
@@ -69,7 +69,7 @@ const SignIn = ({ setIsSignInModal, setIsSignUpModal }) => {
         }}>
           Don't have an account?
           <span style={{
-            color: `${COLORS.borderColor}`,
+            color: `${COLORS.color1}`,
             cursor: 'pointer',
             whiteSpace: 'pre-wrap'
           }} onClick={handleSignUpModalOpening}>{' Sign Up'}</span>

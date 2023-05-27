@@ -55,7 +55,7 @@ const CourseTests = observer(() => {
         {pageTests.map((test) => (
           <Test test={test} key={test.id}></Test>
         ))}
-        {userStore.isAdmin && <ListItem title={'Add Test'} onClick={handleTestAdding}/>}
+        {userStore.isAdmin && <ListItem title={'Add'} onClick={handleTestAdding}/>}
       </List>
       <CreateTest isCreateTestModal={isCreateTestModal}
                   setIsCreateTestModal={setIsCreateTestModal}/>

@@ -6,7 +6,7 @@ import { RoundButton } from '../../ui'
 import { AuthService } from '../../../services'
 import { observer } from 'mobx-react-lite'
 import { MoonOutline, SchoolOutline, SunnyOutline } from 'react-ionicons'
-import { COLORS } from '../../values/colors'
+import { COLORS } from '../../../constants/colors'
 import * as PropTypes from 'prop-types'
 import {COURSES_PATH, getUserResultsPath, USER_RESULTS_PATH} from "../../router";
 import { StoreContext } from '../../context/store-context'
@@ -35,11 +35,12 @@ const Header = observer(() => {
       <Container theme={theme}>
         <Wrapper>
           <Logo to="/">
-            <SchoolOutline color={COLORS.borderColor}
+            <SchoolOutline color={COLORS.color1}
                            height="70px"
                            width="auto"/>
           </Logo>
           <NavBar>
+            {/* {userStore.user.email} */}
             <ThemeToggle>
             {theme === 'light' ?
               (<SunnyOutline onClick={toggleTheme}/>)

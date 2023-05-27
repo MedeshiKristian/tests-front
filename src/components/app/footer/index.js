@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Column, Wrapper, Row, Container, Icons, Icon, FooterLink, Title } from './style'
 import { observer } from 'mobx-react-lite'
 import { LogoFacebook, LogoInstagram, LogoLinkedin, LogoTwitter, SchoolOutline } from 'react-ionicons'
-import { COLORS } from '../../values/colors'
+import { COLORS } from '../../../constants/colors'
 import { ThemeContext } from '../../context/theme-context'
 
 const Footer = observer(() => {
@@ -13,7 +13,7 @@ const Footer = observer(() => {
       <Container>
         <Row>
           <Column>
-            <SchoolOutline color={COLORS.borderColor}
+            <SchoolOutline color={COLORS.color1}
                            height="70px"
                            width="auto"/>
             Follow us

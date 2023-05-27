@@ -1,6 +1,4 @@
 export const COLORS = {
-  borderColor: '#3d9a9b',
-
   firstLight: '#FFFFFF',
   secondLight: '#F4F7FD',
   textLight: '#000000',
@@ -9,5 +7,7 @@ export const COLORS = {
   secondDark: '#20212C',
   textDark: '#FFFFFF',
 
-  iconColor: '#5bff51'
+  color1: '#3d9a9b',
+  color2: '#5bff51',
+  myGrey: 'grey'
 }

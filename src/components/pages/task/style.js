@@ -1,11 +1,12 @@
 import styled from 'styled-components'
-import { COLORS } from '../../values/colors'
+import { COLORS } from '../../../constants/colors'
+import { TRANSITION_DURATION } from '../../../constants/globals'
 
 export const QuestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  transition: all 1s ease-in-out;
+  transition: all 0${TRANSITION_DURATION} ease-in-out;
 
   *, *:before, *:after {
     box-sizing: inherit;
@@ -50,7 +51,7 @@ export const Option = styled.div`
   width: 100%;
   box-shadow: 0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.5);
   background: ${props => props.theme === 'light' ? COLORS.firstLight : COLORS.firstDark};
-  transition: all .5s ease-in-out;
+  transition: all ${TRANSITION_DURATION} ease-in-out;
 
   //&:hover {
   //  transform: scale(1.005);

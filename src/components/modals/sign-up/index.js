@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthService } from '../../../services'
 import AuthInput from '../../ui/auth-input'
 import { LockClosedOutline, MailOutline } from 'react-ionicons'
-import { COLORS } from '../../values/colors'
+import { COLORS } from '../../../constants/colors'
 import { StoreContext } from '../../context/store-context'
 
 const SignUp = ({ setIsSignUpModal, setIsSignInModal }) => {
@@ -102,7 +102,7 @@ const SignUp = ({ setIsSignUpModal, setIsSignInModal }) => {
         }}>
           Already have an account?
           <span style={{
-            color: `${COLORS.borderColor}`,
+            color: `${COLORS.color1}`,
             cursor: 'pointer',
             whiteSpace: 'pre-wrap'
           }} onClick={handleSignInModalOpening}>{' Sign In'}</span>

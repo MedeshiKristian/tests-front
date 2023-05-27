@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { COLORS } from '../../values/colors'
-import { useContext } from 'react'
-import { ThemeContext } from '../../context/theme-context'
+import { COLORS } from '../../../constants/colors'
+import { TRANSITION_DURATION } from '../../../constants/globals'
 
 export const Container = styled.header`
   width: 100%;
@@ -16,7 +15,7 @@ export const Container = styled.header`
   justify-content: center;
   align-items: center;
   z-index: 5;
-  transition: all .5s ease-in-out;
+  transition: all ${TRANSITION_DURATION} ease-in-out;
 
   background: ${props => props.theme === 'light' ? COLORS.firstLight : COLORS.firstDark};
   color: ${props => props.theme === 'light' ? COLORS.textLight : COLORS.textDark};
@@ -52,6 +51,9 @@ export const NavLink = styled(Link)`
   margin: 3px 15px 0 0;
   text-decoration: none;
   color: ${props => props.theme === 'light' ? COLORS.textLight : COLORS.textDark};
+  transition: all ${TRANSITION_DURATION} ease-in-out;
+  user-select: none;
+  
   
   &:after {
     content: '';
@@ -59,7 +61,7 @@ export const NavLink = styled(Link)`
     width: 100%;
     transform: scaleX(0);
     height: 1px;
-    background-color: ${COLORS.borderColor};
+    background-color: ${COLORS.color1};
     transform-origin: center;
     transition: transform 0.25s ease-out;
   }

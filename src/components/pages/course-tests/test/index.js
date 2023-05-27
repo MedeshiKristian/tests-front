@@ -47,18 +47,18 @@ const Test = observer(({ test }) => {
       <ListItem title={test.topic}>
         {userStore.isAuth && test.id &&
           <SquareButton onClick={(event) => handleTestStart(event, test.id, test.topic)}>
-            Start Test
+            Start
           </SquareButton>}
         {userStore.isAdmin && test.id &&
           <>
             <SquareButton onClick={(event) => handleTestShow(event, test.id)}>
-              Show Test
+              Show
             </SquareButton>
             <SquareButton onClick={(event) => handleShowResults(event, test.id)}>
               Show results
             </SquareButton>
             <SquareButton onClick={() => setIsConfirmationModal(true)}>
-              Delete Test
+              Delete
             </SquareButton>
           </>}
       </ListItem>
