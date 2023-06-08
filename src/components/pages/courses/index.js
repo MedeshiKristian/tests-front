@@ -24,9 +24,9 @@ const Courses = observer(() => {
       .then(response => {
         console.log('response', response.data)
         coursesStore.set(response.data)
-        for (let i = 0; i < 50; i++) {
-          coursesStore.add({ name: `Course ${i}` })
-        }
+        // for (let i = 0; i < 50; i++) {
+        //   coursesStore.add({ name: `Course ${i}` })
+        // }
         setPage(1)
       })
       .catch(error => {
