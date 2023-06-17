@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Courses from '../pages/courses'
-import CourseTests from '../pages/course-tests'
-import Testing from '../pages/testing'
+import Courses from '../../pages/courses'
+import CourseTests from '../../pages/course-tests'
+import Testing from '../../pages/testing'
 import { observer } from 'mobx-react-lite'
-import UserResults from '../pages/user-results'
-import Result from '../pages/result'
-import TestQuestions from '../pages/test-questions'
+import UserResults from '../../pages/user-results'
+import Result from '../../pages/result'
+import TestQuestions from '../../pages/test-questions'
 import { Wrapper } from './style'
-import TestResults from "../pages/test-results";
+import TestResults from "../../pages/test-results";
 import { StoreContext } from '../context/store-context'
 
 export const COURSES_PATH = '/'

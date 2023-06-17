@@ -39,7 +39,6 @@ export default class UserStore {
     this.setIsAuth(true)
     this.setUser(response.data)
     localStorage.setItem('user', JSON.stringify(response.data))
-    // localStorage.setItem('user_role', response.data.role)
     localStorage.setItem('token', response.headers.get('Authorization'))
   }
 
