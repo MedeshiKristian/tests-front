@@ -20,7 +20,7 @@ const SignUp = ({ setIsSignUpModal, setIsSignInModal }) => {
   const [visiblePassword, setVisiblePassword] = useState(false)
 
   useEffect(() => {
-    if (userData.password < 8) {
+    if (userData.password.length < 8) {
       setPasswordError(true)
       setPasswordErrorMessage('Password must be at least 8 characters.')
     } else if (userData.password !== userData.passwordConfirmation) {
